@@ -1,11 +1,13 @@
-package com.appscals.daycountr.presentation.components.login
+package com.appscals.daycountr.presentation.components
 
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -13,6 +15,7 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.AnnotatedString
@@ -37,13 +40,19 @@ fun LoginScreen() {
     val emailState = remember { mutableStateOf(TextFieldValue()) }
     val passState = remember { mutableStateOf(TextFieldValue()) }
     var showPassword by remember { mutableStateOf(false) }
-    ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+    ConstraintLayout(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
         val (cardBg, textBoxLayout, icon) = createRefs()
         Card(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxSize()
                 .constrainAs(cardBg) {
                     top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
                 },
             backgroundColor = yellowPrimary,
             shape = RoundedCornerShape(bottomStart = 30.dp, bottomEnd = 30.dp),
@@ -74,16 +83,20 @@ fun LoginScreen() {
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_undraw_calendar_re_ki49),
             contentDescription = "",
             modifier = Modifier
+                .fillMaxSize()
                 .offset(x = 0.dp, y = (-160).dp)
-                .fillMaxWidth()
                 .constrainAs(icon) {
                     top.linkTo(cardBg.bottom, margin = 16.dp)
+                    end.linkTo(parent.end)
+                    start.linkTo(parent.start)
                 }
         )
         Column(
             modifier = Modifier
                 .constrainAs(textBoxLayout) {
                     top.linkTo(cardBg.bottom, margin = 16.dp)
+                    start.linkTo(cardBg.start)
+                    end.linkTo(cardBg.end)
                     bottom.linkTo(parent.bottom)
                 },
             horizontalAlignment = Alignment.CenterHorizontally
@@ -134,7 +147,7 @@ fun LoginScreen() {
                     .padding(24.dp)
                     .requiredHeight(47.dp)
             ) {
-                Text(text = "LOGIN")
+                Text(text = "LOGIN", color = Color.White)
             }
             Text(text =
             buildAnnotatedString {
@@ -142,8 +155,9 @@ fun LoginScreen() {
                 append(
                     AnnotatedString("Register Here", spanStyle = SpanStyle(yellowPrimary))
                 )
-            },
-                Modifier.clickable { Log.e("Test CLick", "TRUE") }
+            }, modifier = Modifier
+                .padding(bottom = 16.dp)
+                .clickable { Log.e("Test CLick", "TRUE") }
             )
         }
     }

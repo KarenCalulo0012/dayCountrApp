@@ -50,8 +50,8 @@ fun AppBar() {
                 }
             }
         },
-        backgroundColor = MaterialTheme.colors.background,
-        contentColor = MaterialTheme.colors.onSurface,
+        backgroundColor = MaterialTheme.colors.secondary,
+        contentColor = MaterialTheme.colors.background,
         elevation = 0.dp
     )
 }
@@ -60,7 +60,7 @@ fun AppBar() {
 fun BottomNavBar(navController: NavController) {
     val items = listOf(BottomNavData.Event, BottomNavData.Settings)
     BottomNavigation(
-        backgroundColor = MaterialTheme.colors.secondary,
+        backgroundColor = MaterialTheme.colors.primary,
         contentColor = Color.White
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -81,8 +81,8 @@ fun BottomNavBar(navController: NavController) {
                         }
                     }
                 },
-                selectedContentColor = MaterialTheme.colors.background,
-                unselectedContentColor = Color.Gray,
+                selectedContentColor = Color.White,
+                unselectedContentColor = Color.LightGray,
 
                 icon = {
                     Icon(

@@ -103,3 +103,13 @@ fun BottomNavBar(navController: NavController) {
         }
     }
 }
+
+@Composable
+fun FloatingActionBtn() {
+    FloatingActionButton(
+        onClick = { /*TODO*/ },
+        backgroundColor = MaterialTheme.colors.primary,
+        content = {
+            Icon(imageVector = Icons.Rounded.Add, contentDescription = "", tint = Color.White)
+        })
+}

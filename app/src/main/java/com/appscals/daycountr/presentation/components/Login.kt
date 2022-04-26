@@ -31,12 +31,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.appscals.daycountr.R
 import com.appscals.daycountr.ui.theme.blueSecondary
 import com.appscals.daycountr.ui.theme.yellowPrimary
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavController) {
     val emailState = remember { mutableStateOf(TextFieldValue()) }
     val passState = remember { mutableStateOf(TextFieldValue()) }
     var showPassword by remember { mutableStateOf(false) }
@@ -140,7 +142,10 @@ fun LoginScreen() {
                     .padding(start = 24.dp, end = 24.dp)
             )
             Button(
-                onClick = { Log.e("Email&Pass", "Email: $emailState Pass: $passState") },
+                onClick = {
+                    Log.e("Email&Pass", "Email: $emailState Pass: $passState")
+                    navController.navigate("dashboardScreen")
+                },
                 shape = RoundedCornerShape(20.dp),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -166,5 +171,5 @@ fun LoginScreen() {
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(rememberNavController())
 }
